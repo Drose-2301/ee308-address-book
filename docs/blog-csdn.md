@@ -1,6 +1,21 @@
 This post walks through a pair-programming assignment from our software engineering course: building an address book that supports bookmarked contacts, several contact methods per person, and Excel import/export. We describe how we split the work, how the data model is shaped, and the parts that actually took time — dirty Excel data and keeping two people's changes apart.
 
-@[toc](Directory)
+## Contents
+
+1. What the application does
+2. Division of work
+3. How we used Git
+4. Data model
+5. Bookmarks
+6. Excel export
+7. Excel import
+8. API surface
+9. Screenshots
+10. Demo video
+11. Tests
+12. Problems worth mentioning
+13. PSP
+14. Closing thoughts
 
 ## Assignment information
 
