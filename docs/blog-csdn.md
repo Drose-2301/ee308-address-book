@@ -1,6 +1,6 @@
-# EE308 Extreme Programming: Building an Address Book with Vue 3 and Spring Boot
-
 This post walks through a pair-programming assignment from our software engineering course: building an address book that supports bookmarked contacts, several contact methods per person, and Excel import/export. We describe how we split the work, how the data model is shaped, and the parts that actually took time — dirty Excel data and keeping two people's changes apart.
+
+@[toc](Directory)
 
 ## Assignment information
 
