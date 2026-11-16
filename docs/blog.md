@@ -10,7 +10,7 @@
 | Objectives of This Assignment | Implement bookmark contacts, multiple contact methods and Excel import/export, and practise pair collaboration with Git branches and pull requests |
 | Other References | [Vue 3 docs](https://vuejs.org/), [Spring Boot docs](https://docs.spring.io/spring-boot/), [Apache POI docs](https://poi.apache.org/), [Vite docs](https://vite.dev/) |
 
-**Author:** （your name / student ID）
+**Author:** Huang Junhan 832401207        Liu Junye         832401212
 
 ## Table of Contents
 
@@ -35,13 +35,13 @@
 
 | Item | Link |
 | --- | --- |
-| GitHub team repository | https://github.com/Drose-2301/ee308-address-book |
-| Code style document | https://github.com/Drose-2301/ee308-address-book/blob/main/codestyle.md |
-| Release v1.0.1 | https://github.com/Drose-2301/ee308-address-book/releases/tag/v1.0.1 |
-| PR #1 (release preparation) | https://github.com/Drose-2301/ee308-address-book/pull/1 |
-| PR #2 (backend de-duplication and tests) | https://github.com/Drose-2301/ee308-address-book/pull/2 |
-| PR #3 (root endpoint and 404 fix) | https://github.com/Drose-2301/ee308-address-book/pull/3 |
-| Demo video | （link to the video, e.g. Bilibili） |
+| GitHub team repository | [https://github.com/Drose-2301/ee308-address-book](https://github.com/Drose-2301/ee308-address-book) |
+| Code style document | [https://github.com/Drose-2301/ee308-address-book/blob/main/codestyle.md](https://github.com/Drose-2301/ee308-address-book/blob/main/codestyle.md) |
+| Release v1.0.1 | [https://github.com/Drose-2301/ee308-address-book/releases/tag/v1.0.1](https://github.com/Drose-2301/ee308-address-book/releases/tag/v1.0.1) |
+| PR #1 (release preparation) | [https://github.com/Drose-2301/ee308-address-book/pull/1](https://github.com/Drose-2301/ee308-address-book/pull/1) |
+| PR #2 (backend de-duplication and tests) |[https://github.com/Drose-2301/ee308-address-book/pull/2](https://github.com/Drose-2301/ee308-address-book/pull/2)|(https://github.com/Drose-2301/ee308-address-book/pull/2)
+| PR #3 (root endpoint and 404 fix) | [https://github.com/Drose-2301/ee308-address-book/pull/3](https://github.com/Drose-2301/ee308-address-book/pull/3) |
+| Demo video | [https://live.csdn.net/v/553566?spm=1001.2014.3001.5501](https://live.csdn.net/v/553566?spm=1001.2014.3001.5501) |
 | Demo import file | `docs/demo-import.xlsx` in the repository |
 
 Tech stack: **Vue 3 + Vite** (front end) and **Spring Boot 4 + Spring Data JPA + SQLite + Apache POI 5** (back end).
@@ -54,18 +54,15 @@ The application UI is in Chinese because the course is taught in Chinese; the co
 
 | Member | GitHub | Responsibilities | Contribution |
 | --- | --- | --- | ---: |
-| Junhan Huang | [Drose-2301](https://github.com/Drose-2301) | Front-end UI (list, search, bookmarks, create/edit dialog), Excel wiring in the UI, README and code style, screenshots and demo video, releases and PR merges | 60% |
-| CountFish | [1iu-cell](https://github.com/1iu-cell) | Back-end entities and REST API, Excel import/export implementation, import de-duplication, back-end tests (`ContactControllerTest`, `ContactServiceTest`) | 40% |
-
-> Both members must confirm these numbers before publishing; the two percentages must add up to 100% and be identical in both blog posts.
+| Junhan Huang | [Drose-2301](https://github.com/Drose-2301) | Front-end UI (list, search, bookmarks, create/edit dialog), Excel wiring in the UI, README and code style, screenshots and demo video, releases and PR merges | 50% |
+| CountFish | [1iu-cell](https://github.com/1iu-cell) | Back-end entities and REST API, Excel import/export implementation, import de-duplication, back-end tests (`ContactControllerTest`, `ContactServiceTest`) | 50% |
 
 ---
 
 ## 3. Git Collaboration and Commit Evidence
 
 ### 3.1 Commit history
-
-![Git commit history](screenshots/git-commits.png)
+![请添加图片描述](https://i-blog.csdnimg.cn/direct/f8a52eb408e344c28fb889cc2b97d875.png)
 
 `main` contains **10 commits**, 3 of which are pull-request merge commits:
 
@@ -84,7 +81,7 @@ The application UI is in Chinese because the course is taught in Chinese; the co
 
 ### 3.2 Commits per member
 
-![Commits per author](screenshots/git-shortlog.png)
+![请添加图片描述](https://i-blog.csdnimg.cn/direct/b74fd62d26184e32a23577ea04b75e41.png)
 
 ```text
 $ git shortlog -sn main
@@ -234,27 +231,19 @@ Opening `http://localhost:8080/` returns a small JSON index with the application
 
 ### 5.1 Screenshots
 
-| Main screen (bookmarks pinned) | Bookmarks only |
-| --- | --- |
-| ![Main screen](screenshots/01-home.png) | ![Bookmarks only](screenshots/02-favorites.png) |
-
-| Create contact (several methods) | Edit contact |
-| --- | --- |
-| ![Create](screenshots/03-create-dialog.png) | ![Edit](screenshots/04-edit-dialog.png) |
-
-| Search | Bookmark toast |
-| --- | --- |
-| ![Search](screenshots/05-search.png) | ![Bookmark toast](screenshots/06-favorite-toast.png) |
-
-| Excel export | Excel import |
-| --- | --- |
-| ![Export](screenshots/07-export.png) | ![Import](screenshots/08-import.png) |
-
-> CSDN does not support repository-relative image paths. Upload the ten images in `screenshots/` to CSDN and replace the links before publishing.
+![请添加图片描述](https://i-blog.csdnimg.cn/direct/e0b88f84829a43f4ba42b3af50356856.png)
+![请添加图片描述](https://i-blog.csdnimg.cn/direct/e04f84f252504ddfb6c1bc4f4504badb.png)
+![请添加图片描述](https://i-blog.csdnimg.cn/direct/de525ac62aeb4893a233ff36edc9d9a7.png)
+![请添加图片描述](https://i-blog.csdnimg.cn/direct/deb7fe77aaf94bd9bfda5882a0c8541b.png)
+![请添加图片描述](https://i-blog.csdnimg.cn/direct/d46dc415a126477ea255becd285d1315.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/9841e5a8418a4634b8e1b5296619a2b8.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/e46de6693950425a9f3db3013d5aa554.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/1b531474ad424a3b990490ef7b8f79a9.png)
 
 ### 5.2 Demo video
 
-（Embed the video here: upload the mp4 to Bilibili and paste the iframe, or use the CSDN video uploader.）
+[video(video-yYu77p49-1794826524618)(type-csdn)(url-https://live.csdn.net/v/embed/553566)(image-https://v-blog.csdnimg.cn/asset/b84c7d11ac645b26493f051409a67b89/cover/Cover0.jpg)(title-EE308-通讯录-演示)]
+
 
 The recording walks through: toggling and filtering bookmarks → adding one more contact method to an existing contact → creating a contact → exporting to Excel → importing a file whose third row has no name (the UI reports "1 skipped") → searching → the back-end endpoint index page.
 
