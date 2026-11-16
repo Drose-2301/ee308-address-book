@@ -32,7 +32,8 @@ class ExcelServiceTest {
 		assertThat(parsed.totalRows()).isEqualTo(1);
 		assertThat(parsed.skipped()).isZero();
 
-		Contact imported = parsed.contacts().get(0);
+		Contact imported = parsed.contacts().get(0).contact();
+		assertThat(parsed.contacts().get(0).rowNumber()).isEqualTo(2);
 		assertThat(imported.getName()).isEqualTo("林晓");
 		assertThat(imported.isFavorite()).isTrue();
 		assertThat(imported.getMethods()).hasSize(3);
@@ -48,6 +49,6 @@ class ExcelServiceTest {
 
 		ExcelService.ParseResult parsed = excelService.parse(new ByteArrayInputStream(workbook));
 		assertThat(parsed.contacts()).hasSize(1);
-		assertThat(parsed.contacts().get(0).getMethods()).isEmpty();
+		assertThat(parsed.contacts().get(0).contact().getMethods()).isEmpty();
 	}
 }
