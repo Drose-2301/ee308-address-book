@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import com.example.addressbook.exception.BadRequestException;
 import com.example.addressbook.exception.NotFoundException;
@@ -28,6 +29,13 @@ public class ApiExceptionHandler {
 	@ExceptionHandler(MaxUploadSizeExceededException.class)
 	public ResponseEntity<Map<String, String>> handleTooLarge(MaxUploadSizeExceededException e) {
 		return ResponseEntity.badRequest().body(Map.of("message", "文件太大，最大支持 5MB"));
+	}
+
+	/** Unknown URLs must stay 404, otherwise the catch-all below turns them into a 500. */
+	@ExceptionHandler(NoResourceFoundException.class)
+	public ResponseEntity<Map<String, String>> handleNoResource(NoResourceFoundException e) {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND)
+				.body(Map.of("message", "接口不存在：/" + e.getResourcePath()));
 	}
 
 	@ExceptionHandler(Exception.class)
