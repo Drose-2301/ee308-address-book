@@ -185,7 +185,7 @@ public class ExcelService {
 			}
 
 			DataFormatter formatter = new DataFormatter();
-			List<Contact> contacts = new ArrayList<>();
+			List<ParsedContact> contacts = new ArrayList<>();
 			List<String> messages = new ArrayList<>();
 			int totalRows = 0;
 			int skipped = 0;
@@ -217,7 +217,7 @@ public class ExcelService {
 				addMethods(contact, row, columns.get("wechat"), MethodType.WECHAT, formatter);
 				addMethods(contact, row, columns.get("qq"), MethodType.QQ, formatter);
 				addMethods(contact, row, columns.get("other"), MethodType.OTHER, formatter);
-				contacts.add(contact);
+				contacts.add(new ParsedContact(contact, r + 1));
 			}
 
 			if (contacts.isEmpty() && skipped == 0) {
@@ -312,7 +312,15 @@ public class ExcelService {
 		return text.toLowerCase(Locale.ROOT).replaceAll("[\\s*_\\-]", "").trim();
 	}
 
-	/** Raw output of a parse run, turned into an {@code ImportResult} by the service layer. */
-	public record ParseResult(List<Contact> contacts, int totalRows, int skipped, List<String> messages) {
+	/**
+	 * Raw output of a parse run, turned into an {@code ImportResult} by the service layer.
+	 * Every contact keeps the 1-based row number it came from so the caller can report
+	 * "第 N 行：..." style messages (duplicates, skipped rows, ...).
+	 */
+	public record ParseResult(List<ParsedContact> contacts, int totalRows, int skipped,
+			List<String> messages) {
+	}
+
+	public record ParsedContact(Contact contact, int rowNumber) {
 	}
 }

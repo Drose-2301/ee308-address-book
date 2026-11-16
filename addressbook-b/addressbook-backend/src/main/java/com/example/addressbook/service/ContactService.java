@@ -1,6 +1,11 @@
 package com.example.addressbook.service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -91,9 +96,60 @@ public class ContactService {
 		catch (java.io.IOException e) {
 			throw new BadRequestException("读取上传文件失败：" + e.getMessage());
 		}
-		repository.saveAll(parsed.contacts());
-		return new ImportResult(parsed.totalRows(), parsed.contacts().size(), parsed.skipped(),
+
+		// 去重：以「姓名 + 首要联系方式」为键，库中已有的和本文件内已出现的都算重复。
+		Set<String> knownKeys = new HashSet<>();
+		repository.findAll().forEach(existing -> {
+			String key = dedupeKey(existing);
+			if (key != null) {
+				knownKeys.add(key);
+			}
+		});
+
+		List<Contact> toSave = new ArrayList<>();
+		int duplicates = 0;
+		for (ExcelService.ParsedContact row : parsed.contacts()) {
+			String key = dedupeKey(row.contact());
+			if (key != null && !knownKeys.add(key)) {
+				duplicates++;
+				parsed.messages().add("第 " + row.rowNumber() + " 行：与已有联系人重复（姓名 + 首要联系方式），已跳过");
+				continue;
+			}
+			toSave.add(row.contact());
+		}
+
+		repository.saveAll(toSave);
+		return new ImportResult(parsed.totalRows(), toSave.size(), parsed.skipped() + duplicates,
 				parsed.messages());
+	}
+
+	/**
+	 * Key used to detect duplicates: normalised name plus the primary phone number (falling back
+	 * to the first contact method). Returns {@code null} when there is nothing to compare, so a
+	 * contact with neither a phone nor any other value is always imported instead of being dropped.
+	 */
+	private String dedupeKey(Contact contact) {
+		if (contact.getName() == null || contact.getName().isBlank()) {
+			return null;
+		}
+		String value = contact.getMethods().stream()
+				.filter(method -> method.getType() == MethodType.PHONE)
+				.map(ContactMethod::getValue)
+				.filter(Objects::nonNull)
+				.map(String::trim)
+				.filter(v -> !v.isEmpty())
+				.findFirst()
+				.orElseGet(() -> contact.getMethods().stream()
+						.map(ContactMethod::getValue)
+						.filter(Objects::nonNull)
+						.map(String::trim)
+						.filter(v -> !v.isEmpty())
+						.findFirst()
+						.orElse(""));
+		if (value.isEmpty()) {
+			return null;
+		}
+		return contact.getName().trim().toLowerCase(Locale.ROOT) + "|" + value.replaceAll("[\\s\\-()]", "");
 	}
 
 	// ------------------------------------------------------------------ helpers
