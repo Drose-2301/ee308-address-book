@@ -1,0 +1,16 @@
+# 前端构建产物
+node_modules/
+dist/
+.vite/
+
+# 后端构建产物
+target/
+
+# 本地数据库
+*.db
+*.db-journal
+
+# 编辑器 / 系统
+.idea/
+.DS_Store
+*.log
